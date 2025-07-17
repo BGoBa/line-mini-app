@@ -1,0 +1,25 @@
+{
+  "name": "line-mini-app",
+  "version": "1.0.0",
+  "description": "Line Mini App Development Environment",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=3000 --open=/index.html",
+    "dev": "live-server --port=3000 --open=/index.html",
+    "build": "echo 'Build process can be added here'",
+    "test": "echo 'Test process can be added here'"
+  },
+  "keywords": [
+    "line",
+    "mini-app",
+    "web-app"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.0"
+  },
+  "dependencies": {
+    "@line/liff": "^2.27.0"
+  }
+}
