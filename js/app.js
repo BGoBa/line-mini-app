@@ -251,7 +251,7 @@ class LineMiniApp {
 
 // アプリケーションの初期化
 document.addEventListener('DOMContentLoaded', () => {
-    // LIFFが利用できない場合のフォールバック
+    // 既存LIFF初期化
     if (typeof liff === 'undefined') {
         console.warn('LIFF SDKが読み込まれていません。開発モードで動作します。');
         
@@ -271,6 +271,56 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 本格的なアプリケーションの初期化
     const app = new LineMiniApp();
+
+    // --- メニューのボタン制御 ---
+    const menuBtns = document.querySelectorAll('.menu-btn');
+    const iframeModal = document.getElementById('iframeModal');
+    const contentIframe = document.getElementById('contentIframe');
+    const closeIframeBtn = document.getElementById('closeIframeBtn');
+    menuBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const url = btn.getAttribute('data-url');
+            contentIframe.src = url;
+            iframeModal.style.display = 'flex';
+        });
+    });
+    closeIframeBtn.addEventListener('click', () => {
+        iframeModal.style.display = 'none';
+        contentIframe.src = '';
+    });
+
+    // --- チャット欄制御（LINE風UI） ---
+    const chatMessages = document.getElementById('chatMessages');
+    const chatInput = document.getElementById('chatInput');
+    const chatSendBtn = document.getElementById('chatSendBtn');
+    function addChatMessage(message, sender) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'chat-message ' + sender;
+        const bubble = document.createElement('div');
+        bubble.className = 'chat-bubble';
+        bubble.textContent = message;
+        msgDiv.appendChild(bubble);
+        chatMessages.appendChild(msgDiv);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+    function autoReply() {
+        setTimeout(() => {
+            addChatMessage('担当者からご回答させていただきます。しばらくお時間をいただく場合もございますので予めご了承ください。', 'admin');
+        }, 800);
+    }
+    chatSendBtn.addEventListener('click', () => {
+        const msg = chatInput.value.trim();
+        if (!msg) return;
+        addChatMessage(msg, 'user');
+        chatInput.value = '';
+        autoReply();
+        // --- ここで管理者へのPUSH送信API呼び出しも拡張可能 ---
+    });
+    chatInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            chatSendBtn.click();
+        }
+    });
 });
 
 // ユーティリティ関数

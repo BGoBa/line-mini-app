@@ -5,63 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Line Mini App</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 </head>
-<body>
+<body class="line-bg">
     <div id="app">
-        <header class="header">
-            <h1>Line Mini App</h1>
-        </header>
-        
-        <main class="main">
-            <div class="container">
-                <div class="welcome-section">
-                    <h2>ようこそ！</h2>
-                    <p>このLineミニアプリへようこそ</p>
-                </div>
-                
-                <div class="profile-section" id="profileSection" style="display: none;">
-                    <h3>プロフィール情報</h3>
-                    <div class="profile-info">
-                        <img id="profilePicture" src="" alt="プロフィール画像" class="profile-picture">
-                        <div class="profile-details">
-                            <p><strong>名前:</strong> <span id="displayName"></span></p>
-                            <p><strong>ステータスメッセージ:</strong> <span id="statusMessage"></span></p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="action-section">
-                    <button id="loginBtn" class="btn btn-primary">ログイン</button>
-                    <button id="logoutBtn" class="btn btn-secondary" style="display: none;">ログアウト</button>
-                    
-                    <div id="messageSection" class="message-section" style="display: none;">
-                        <h3>メッセージ送信</h3>
-                        <div class="message-form">
-                            <div class="form-group">
-                                <label for="messageText">メッセージ:</label>
-                                <textarea id="messageText" placeholder="送信するメッセージを入力してください" rows="3"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="messageType">送信先:</label>
-                                <select id="messageType">
-                                    <option value="chat">チャット</option>
-                                    <option value="friends">友達</option>
-                                    <option value="groups">グループ</option>
-                                </select>
-                            </div>
-                            <button id="shareBtn" class="btn btn-success">メッセージを送信</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="status-section">
-                    <p id="statusText">アプリの状態を確認中...</p>
-                </div>
+        <main class="main chat-main">
+            <!-- チャットメッセージ欄 -->
+            <div class="chat-messages" id="chatMessages"></div>
+            <!-- チャット入力欄 -->
+            <div class="chat-input-row">
+                <button class="chat-plus-btn"><i class="fa-solid fa-plus"></i></button>
+                <input type="text" id="chatInput" class="chat-input" placeholder="メッセージを入力..." autocomplete="off" />
+                <button id="chatSendBtn" class="chat-send-btn">送信</button>
             </div>
         </main>
+        <!-- 下部固定メニュー -->
+        <div class="menu-section-fixed">
+            <div class="menu-row">
+                <button class="menu-btn" data-url="https://cchrjapan.org/about_us/">
+                  <i class="fa-solid fa-users"></i><br>私たちについて
+                </button>
+                <button class="menu-btn" data-url="https://cchrjapan.org/exposure/">
+                  <i class="fa-solid fa-gavel"></i><br>摘発事例など
+                </button>
+                <button class="menu-btn" data-url="https://cchrjapan.org/film/">
+                  <i class="fa-solid fa-film"></i><br>映像／書籍
+                </button>
+            </div>
+            <div class="menu-row">
+                <button class="menu-btn" data-url="https://cchrjapan.org/whistle-blowing/">
+                  <i class="fa-solid fa-exclamation-triangle"></i><br>被害報告・内部告発<br>フォーム
+                </button>
+                <button class="menu-btn" data-url="https://cchrjapan.org/comics/">
+                  <i class="fa-solid fa-book-open"></i><br>マンガで分かる<br>精神医療の闇
+                </button>
+                <button class="menu-btn" data-url="https://cchrjapan.org/support/">
+                  <i class="fa-solid fa-hands-helping"></i><br>サポーター募集<br>(活動へのご寄付)
+                </button>
+            </div>
+        </div>
+        <!-- iframeモーダル -->
+        <div id="iframeModal" class="iframe-modal" style="display:none;">
+            <button id="closeIframeBtn" class="close-iframe-btn">×</button>
+            <iframe id="contentIframe" src="" frameborder="0" allowfullscreen></iframe>
+        </div>
     </div>
-    
     <script src="js/app.js"></script>
 </body>
 </html> 
