@@ -303,6 +303,8 @@ document.addEventListener('DOMContentLoaded', () => {
         chatMessages.appendChild(msgDiv);
         chatMessages.scrollTop = chatMessages.scrollHeight;
     }
+    // 最初の管理者メッセージ
+    addChatMessage('この度は我々「市民の人権擁護の会」の活動に興味をお持ちいただき誠にありがとうございました！このミニアプリでは皆様のご意見やご質問を受け付けております。以下の入力枠に自由にご記入ください。\n\n※メッセージは当スタッフのみに届きます。ほかの登録者には公開されませんのでご安心ください。', 'admin');
     function autoReply() {
         setTimeout(() => {
             addChatMessage('担当者からご回答させていただきます。しばらくお時間をいただく場合もございますので予めご了承ください。', 'admin');
